@@ -10,8 +10,8 @@ interface Product {
   name: string;
   price: number;
   image: string;
-  category: string;
-  rating: number;
+  category?: string;
+  rating?: number;
 }
 
 const ProductsPage = () => {
@@ -32,8 +32,18 @@ const ProductsPage = () => {
     const fetchProducts = async () => {
       try {
         setIsLoading(true);
-        const response = await api.get("/products", { params: filters });
-        setProducts(response.products);
+        const { products } = await api.get("/products", filters);
+        // Map backend _id to id for ProductCard compatibility
+        setProducts(
+          products.map((p: any) => ({
+            id: p._id || p.id || '',
+            name: p.name,
+            price: p.price,
+            image: Array.isArray(p.images) && p.images.length > 0 ? p.images[0] : p.image || 'https://via.placeholder.com/300x300?text=No+Image',
+            category: (p.category && (p.category.name || p.category)) || '',
+            rating: (p.rating && typeof p.rating === 'object' ? p.rating.average : p.rating) ?? 0,
+          }))
+        );
       } catch (error) {
         console.error("Failed to fetch products:", error);
       } finally {

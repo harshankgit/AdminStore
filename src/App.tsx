@@ -2,19 +2,18 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
 
+import ProductsPage from "./pages/ProductsPage";
 import ProductDetail from "./pages/ProductDetail";
 import CartPage from "./pages/CartPage";
-import CheckoutPage from "./pages/CheckoutPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import AddProduct from "./pages/admin/AddProduct";
+import CreateCategory from "./pages/admin/CreateCategory";
+import AdminProducts from "./pages/admin/Products";
 import AdminLayout from "./components/admin/AdminLayout";
 import AdminDashboard from "./pages/admin/AdminDashboard";
-import AdminProducts from "./pages/admin/Products";
-import AdminOrders from "./pages/admin/Orders";
-import AdminCustomers from "./pages/admin/Customers";
-import NotFound from "./pages/NotFound";
+
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import ProductsPage from "./pages/ProductsPage";
 
 function App() {
   return (
@@ -40,6 +39,9 @@ function App() {
         }
       >
         <Route index element={<AdminDashboard />} />
+        <Route path="/admin/add-product" element={<AddProduct />} />
+        <Route path="/admin/create-category" element={<CreateCategory />} />
+        <Route path="/admin/products" element={<AdminProducts />} />
         {/* <Route path="products" element={<AdminProducts />} />
         <Route path="orders" element={<AdminOrders />} />
         <Route path="customers" element={<AdminCustomers />} /> */}

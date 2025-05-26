@@ -1,14 +1,16 @@
-import { Link, useLocation } from 'react-router-dom';
-import { 
-  LayoutDashboard, 
-  Package, 
-  ShoppingBag, 
-  Users, 
-  Settings, 
-  LogOut, 
-  X 
-} from 'lucide-react';
-import { useAuth } from '../../hooks/useAuth';
+import { Link, useLocation } from "react-router-dom";
+import {
+  LayoutDashboard,
+  Package,
+  PackagePlus,
+  ShoppingBag,
+  Users,
+  Settings,
+  LogOut,
+  X,
+  Tag,
+} from "lucide-react";
+import { useAuth } from "../../hooks/useAuth";
 
 interface AdminSidebarProps {
   mobile?: boolean;
@@ -20,35 +22,47 @@ const AdminSidebar = ({ mobile = false, closeSidebar }: AdminSidebarProps) => {
   const { user, logout } = useAuth();
 
   const isActive = (path: string) => {
-    return location.pathname === path || location.pathname.startsWith(`${path}/`);
+    return (
+      location.pathname === path || location.pathname.startsWith(`${path}/`)
+    );
   };
 
   const navItems = [
-    { 
-      name: 'Dashboard', 
-      path: '/admin', 
-      icon: <LayoutDashboard size={20} />, 
-      exact: true 
+    {
+      name: "Dashboard",
+      path: "/admin",
+      icon: <LayoutDashboard size={20} />,
+      exact: true,
     },
-    { 
-      name: 'Products', 
-      path: '/admin/products', 
-      icon: <Package size={20} /> 
+    {
+      name: "Products",
+      path: "/admin/products",
+      icon: <Package size={20} />,
     },
-    { 
-      name: 'Orders', 
-      path: '/admin/orders', 
-      icon: <ShoppingBag size={20} /> 
+    {
+      name: "Add Product",
+      path: "/admin/add-product",
+      icon: <PackagePlus size={20} />,
     },
-    { 
-      name: 'Customers', 
-      path: '/admin/customers', 
-      icon: <Users size={20} /> 
+    {
+      name: "Categories",
+      path: "/admin/create-category",
+      icon: <Tag size={20} />,
     },
-    { 
-      name: 'Settings', 
-      path: '/admin/settings', 
-      icon: <Settings size={20} /> 
+    {
+      name: "Orders",
+      path: "/admin/orders",
+      icon: <ShoppingBag size={20} />,
+    },
+    {
+      name: "Customers",
+      path: "/admin/customers",
+      icon: <Users size={20} />,
+    },
+    {
+      name: "Settings",
+      path: "/admin/settings",
+      icon: <Settings size={20} />,
     },
   ];
 
@@ -60,7 +74,7 @@ const AdminSidebar = ({ mobile = false, closeSidebar }: AdminSidebarProps) => {
           <Link to="/admin" className="flex items-center text-xl font-semibold">
             Admin Panel
           </Link>
-          <button 
+          <button
             className="text-white p-1 rounded-md hover:bg-primary-700"
             onClick={closeSidebar}
           >
@@ -82,11 +96,13 @@ const AdminSidebar = ({ mobile = false, closeSidebar }: AdminSidebarProps) => {
       <div className="px-6 py-4 border-b border-primary-700">
         <div className="flex items-center">
           <div className="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-lg font-semibold">
-            {user?.name?.charAt(0) || 'A'}
+            {user?.name?.charAt(0) || "A"}
           </div>
           <div className="ml-3">
-            <p className="font-medium">{user?.name || 'Admin User'}</p>
-            <p className="text-xs text-primary-300">{user?.email || 'admin@example.com'}</p>
+            <p className="font-medium">{user?.name || "Admin User"}</p>
+            <p className="text-xs text-primary-300">
+              {user?.email || "admin@example.com"}
+            </p>
           </div>
         </div>
       </div>
@@ -98,9 +114,10 @@ const AdminSidebar = ({ mobile = false, closeSidebar }: AdminSidebarProps) => {
             key={item.path}
             to={item.path}
             className={`flex items-center px-2 py-2 rounded-md transition-colors ${
-              isActive(item.path) && (item.exact ? location.pathname === item.path : true)
-                ? 'bg-primary-700 text-white'
-                : 'text-primary-200 hover:bg-primary-700 hover:text-white'
+              isActive(item.path) &&
+              (item.exact ? location.pathname === item.path : true)
+                ? "bg-primary-700 text-white"
+                : "text-primary-200 hover:bg-primary-700 hover:text-white"
             }`}
             onClick={mobile ? closeSidebar : undefined}
           >
