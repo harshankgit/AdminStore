@@ -128,11 +128,11 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start">
                 <MapPin className="mr-2 mt-1 flex-shrink-0" size={18} />
-                <span>123 Commerce St, Business City, 10001</span>
+                <span>Narol Ahmedabad Gujarat, Business City, 382405</span>
               </li>
               <li className="flex items-center">
                 <Phone className="mr-2 flex-shrink-0" size={18} />
-                <span>+1 (555) 123-4567</span>
+                <span>+91 8965992035</span>
               </li>
               <li className="flex items-center">
                 <Mail className="mr-2 flex-shrink-0" size={18} />
